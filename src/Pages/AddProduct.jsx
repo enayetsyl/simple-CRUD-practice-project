@@ -25,7 +25,7 @@ const AddProduct = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
       <div className='flex flex-col gap-3 pb-5'>
         <label htmlFor="" className='font-bold'>Product Name</label>
-      <input type="text" placeholder="Enter Product Name" {...register("Product Name", {required: true})} className='border border-solid border-black p-2' />
+      <input type="text" placeholder="Enter Product Name" {...register("ProductName", {required: true})} className='border border-solid border-black p-2' />
       </div>
       <div className='flex flex-col gap-3 pb-5'>
       <label htmlFor="" className='font-bold'>Product Size</label>
@@ -46,7 +46,7 @@ const AddProduct = () => {
       </div>
       <div className='flex flex-col gap-3 pb-5'>
       <label htmlFor="" className='font-bold'>Available Full Year?</label>
-      <input type="checkbox" placeholder="Available All Year" {...register("Available All Year", {required: true})} className='text-2xl'/>
+      <input type="checkbox" placeholder="availableAllYear" {...register("availableAllYear", {required: true})} className='text-2xl'/>
       </div>
       <input type="submit" className='w-full py-5 bg-green-600 text-white text-2xl' />
     </form>

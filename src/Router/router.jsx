@@ -28,8 +28,9 @@ import Error from "../Pages/Error";
         element:<AddProduct></AddProduct>
       },
       {
-        path: '/updatejob/:id',
-        element:<UpdateProduct></UpdateProduct>
+        path: '/updateproduct/:id',
+        element:<UpdateProduct></UpdateProduct>,
+        loader: ({params}) => fetch(`http://localhost:5000/allproducts/${params.id}`)
       },
       {
         path: '/login',
