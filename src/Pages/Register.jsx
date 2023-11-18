@@ -1,9 +1,8 @@
-import { useContext } from 'react';
 import backgroundPhoto from '../assets/404.jpg'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import { getAuth, updateProfile } from 'firebase/auth';
-import { AuthContext } from '../Provider/AuthProvider';
+import useAuth from '../hook/useAuth';
 
 const auth = getAuth();
 
@@ -11,7 +10,7 @@ const auth = getAuth();
 const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
-const {createUser, setUserName, setUserPhoto} = useContext(AuthContext)   // if you use custom hook for useContext and AuthContext then change it in here. import necessary items here
+const {createUser, setUserName, setUserPhoto} = useAuth()   // if you use custom hook for useContext and AuthContext then change it in here. import necessary items here
 
 
   const handleRegister = e =>{

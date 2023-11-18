@@ -5,12 +5,14 @@ import axios from 'axios';
 import {  FaEdit, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import useAxiosSecure from '../hook/useAxiosSecure';
 
 const ManageProduct = () => {
+  const axiosSecure = useAxiosSecure()
   const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ['product'],
     queryFn: () =>
-      axios.get('http://localhost:5000/allproducts')
+      axiosSecure.get('/allproducts')
         .then((res) => {
           return res.data;
         })
@@ -19,7 +21,7 @@ const ManageProduct = () => {
           throw error;
         }),
   });
-
+// console.log(data)
   const handleDelete = id => {
     swal({
       title: "Are you sure?",
@@ -29,7 +31,7 @@ const ManageProduct = () => {
       dangerMode: true,
     }).then(async (willDelete) => {
       if (willDelete) {
-          const res = await axios.delete(`http://localhost:5000/allproducts/${id}`);
+          const res = await axiosSecure.delete(`/allproducts/${id}`);
           // console.log(res.data);
           if (res.data.deletedCount > 0) {
               // refetch to update the ui
@@ -67,7 +69,7 @@ const ManageProduct = () => {
       {
         isLoading ? (<p>Your item is loading</p>) :
         (
-          data.map((product, idx) => (
+          data?.map((product, idx) => (
             <tr key={product._id}>
           <th>{idx + 1}</th>
           <td>{product.ProductName}</td>

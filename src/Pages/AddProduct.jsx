@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
+import useAxiosSecure from '../hook/useAxiosSecure';
 
 const AddProduct = () => {
-
+  const axiosSecure = useAxiosSecure()
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
     console.log(data)
-    axios.post('http://localhost:5000/addproduct', data)
+    axiosSecure.post('/addproduct', data)
     .then((res) => {
       if(res.data.insertedId){
         swal("Congratulation!", "You successfully added a product!", "success");

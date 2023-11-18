@@ -15,12 +15,12 @@ const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
    <AuthProvider>
+    <QueryClientProvider client={queryClient}>
    <RouterProvider router={router}/>
-   </AuthProvider>
    </QueryClientProvider>
-  </React.StrictMode>,
+   </AuthProvider>
+  </React.StrictMode>
 )
 
 // Auth provider is included. name the router file start with small r and router folder start with capital R.

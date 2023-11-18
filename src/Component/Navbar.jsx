@@ -1,10 +1,12 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
+// import useAuth from "../hook/useAuth";
+import { useContext } from "react";
+import AuthProvider from "../Provider/AuthProvider";
+import useAuth from "../hook/useAuth";
 
 const Navbar = () => {
- const {user} = useContext(AuthContext)
- console.log(user)
+ const {user, logOut} = useAuth()
+//  console.log(user)
   return (
     <div className="flex justify-center items-center gap-10 py-10">
       <Link to='/addproduct'>
@@ -13,11 +15,15 @@ const Navbar = () => {
       <Link to='/allproduct'>
       <button className="bg-yellow-400 py-4 px-6 text-white text-center font-bold text-xl">Manage Product</button>
       </Link>      
-      <Link to='/login'>
-      <button className="bg-yellow-400 py-4 px-6 text-white text-center font-bold text-xl">Login</button>
-      </Link>      
+           
       {
-        user && (<p>{user.displayName}</p>)
+        user ? (<><p>{user.displayName}</p>
+        <button onClick={logOut}
+        className="bg-yellow-400 py-4 px-6 text-white text-center font-bold text-xl"
+        >Logout</button></>
+        ) : (<Link to='/login'>
+        <button className="bg-yellow-400 py-4 px-6 text-white text-center font-bold text-xl">Login</button>
+        </Link> )
       }
     </div>
   );

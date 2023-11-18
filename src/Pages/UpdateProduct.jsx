@@ -2,19 +2,27 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom';
 import swal from 'sweetalert';
+import useAuth from '../hook/useAuth';
+import useAxiosSecure from '../hook/useAxiosSecure';
 const UpdateProduct = () => {
   const {ProductName, _id, Size, Color} = useLoaderData()
-
+  const axiosSecure = useAxiosSecure()
+  const {user} = useAuth()
+  console.log(user)
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = async (data) => {
-   
-    const updateRes = await axios.patch(`http://localhost:5000/allproducts/${_id}`, data)
-    {
-      if(updateRes.data.modifiedCount > 0){
+    try {
+      const updateRes = await axiosSecure.patch(`/allproducts/${_id}?email=${user?.email}`, data);
+  
+      if (updateRes.data.modifiedCount > 0) {
         swal("Congratulation!", "Your product updated successfully!", "success");
       }
+    } catch (error) {
+      // Handle error if needed
+      console.error("Error updating product:", error);
     }
   };
+  
 
   return (
     <div>
