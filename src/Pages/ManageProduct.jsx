@@ -36,14 +36,10 @@ const ManageProduct = () => {
           if (res.data.deletedCount > 0) {
               // refetch to update the ui
               refetch();
-             
               swal("Poof! Your imaginary file has been deleted!", {
                 icon: "success",
               });
-
           }
-
-
       }
       else {
         swal("Your imaginary file is safe!");
